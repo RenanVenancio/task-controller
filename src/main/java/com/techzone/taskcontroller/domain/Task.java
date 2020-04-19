@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.techzone.taskcontroller.domain.enums.TaskStatus;
+
 @Entity
 public class Task implements Serializable {
 
@@ -33,13 +35,13 @@ public class Task implements Serializable {
 		// EMPTY CONSTRUCTOR
 	}
 
-	public Task(Integer id, String title, String description, Long taskPoints, Long status, Date startDate,
+	public Task(Integer id, String title, String description, Long taskPoints, TaskStatus status, Date startDate,
 			Date endDate) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.taskPoints = taskPoints;
-		this.status = status;
+		this.status = status.getCod();
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
@@ -76,12 +78,12 @@ public class Task implements Serializable {
 		this.taskPoints = taskPoints;
 	}
 
-	public Long getStatus() {
-		return status;
+	public TaskStatus getStatus() {
+		return TaskStatus.toEnum(status);
 	}
 
-	public void setStatus(Long status) {
-		this.status = status;
+	public void setStatus(TaskStatus status) {
+		this.status = status.getCod();
 	}
 
 	public Date getStartDate() {

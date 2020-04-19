@@ -1,22 +1,31 @@
 package com.techzone.taskcontroller.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Department implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String departmentName;
-	
+
+	@OneToMany(mappedBy = "department")
+	private List<Person> persons = new ArrayList<>();
+
+	@OneToMany(mappedBy = "department")
+	private List<ProjectHistory> projectHistories = new ArrayList<>();
+
 	public Department() {
 		// EMPTY CONSTRUCTOR
 	}
@@ -40,6 +49,22 @@ public class Department implements Serializable {
 
 	public void setDepartmentName(String departmentName) {
 		this.departmentName = departmentName;
+	}
+
+	public List<Person> getPersons() {
+		return persons;
+	}
+
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
+	}
+
+	public List<ProjectHistory> getProjectHistories() {
+		return projectHistories;
+	}
+
+	public void setProjectHistories(List<ProjectHistory> projectHistories) {
+		this.projectHistories = projectHistories;
 	}
 
 	@Override

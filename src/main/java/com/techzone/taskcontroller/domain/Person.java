@@ -1,12 +1,17 @@
 package com.techzone.taskcontroller.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,6 +29,16 @@ public class Person implements Serializable {
 	@NotNull
 	private String phoneNumber;
 	private Date hireDate;
+
+	@OneToMany(mappedBy = "manager")
+	private List<ProjectHistory> projectHistories = new ArrayList<>();
+
+	@ManyToOne
+	@JoinColumn(name = "department_id")
+	private Department department;
+	
+	@OneToMany(mappedBy = "manager")
+	private List<Project> projects = new ArrayList<>();
 
 	public Person() {
 		// EMPTY CONSTRUCTOR
@@ -85,6 +100,22 @@ public class Person implements Serializable {
 
 	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
+	}
+
+	public List<ProjectHistory> getProjectHistories() {
+		return projectHistories;
+	}
+
+	public void setProjectHistories(List<ProjectHistory> projectHistories) {
+		this.projectHistories = projectHistories;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	@Override

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,8 +22,15 @@ public class ProjectHistory implements Serializable {
 	@NotNull
 	private Date startDate;
 	private Date endDate;
+
 	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "manager_id")
 	private Person manager;
+
+	@ManyToOne
+	@JoinColumn(name = "department_id")
+	private Department department;
 
 	public ProjectHistory() {
 		// EMPTY CONSTRUCTOR
@@ -64,6 +73,14 @@ public class ProjectHistory implements Serializable {
 
 	public void setManager(Person manager) {
 		this.manager = manager;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	@Override

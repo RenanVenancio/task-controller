@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -24,6 +25,8 @@ public class Project implements Serializable {
 	@NotNull
 	private String projectTitle;
 	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "manager_id")
 	private Person manager;
 	@NotNull
 	private Long minSalary;
@@ -33,9 +36,10 @@ public class Project implements Serializable {
 	@ManyToMany
 	@JoinTable(
 			name = "PROJECT_TASK",
-			joinColumns = @JoinColumn(referencedColumnName = "project_id"),
-			inverseJoinColumns = @JoinColumn(referencedColumnName = "task_id")
+			joinColumns = @JoinColumn(name = "project_id"),
+			inverseJoinColumns = @JoinColumn(name = "task_id")
 	)
+	
 	private List<Task> tasks = new ArrayList<>();
 
 	public Project() {
