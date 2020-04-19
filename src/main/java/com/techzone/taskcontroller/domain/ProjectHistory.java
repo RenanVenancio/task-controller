@@ -1,47 +1,37 @@
 package com.techzone.taskcontroller.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
-public class Task implements Serializable {
+public class ProjectHistory implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private String title;
-	private String description;
-	private Long taskPoints;
-	private Long status;
+	@NotNull
 	private Date startDate;
 	private Date endDate;
+	@NotNull
+	private Person manager;
 
-	@ManyToMany(mappedBy = "tasks")
-	private List<Project> projects = new ArrayList<>();
-
-	public Task() {
+	public ProjectHistory() {
 		// EMPTY CONSTRUCTOR
 	}
 
-	public Task(Integer id, String title, String description, Long taskPoints, Long status, Date startDate,
-			Date endDate) {
+	public ProjectHistory(Integer id, Date startDate, Date endDate, Person manager) {
 		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.taskPoints = taskPoints;
-		this.status = status;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.manager = manager;
 	}
 
 	public Integer getId() {
@@ -50,38 +40,6 @@ public class Task implements Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Long getTaskPoints() {
-		return taskPoints;
-	}
-
-	public void setTaskPoints(Long taskPoints) {
-		this.taskPoints = taskPoints;
-	}
-
-	public Long getStatus() {
-		return status;
-	}
-
-	public void setStatus(Long status) {
-		this.status = status;
 	}
 
 	public Date getStartDate() {
@@ -100,12 +58,12 @@ public class Task implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public List<Project> getProjects() {
-		return projects;
+	public Person getManager() {
+		return manager;
 	}
 
-	public void setProjects(List<Project> projects) {
-		this.projects = projects;
+	public void setManager(Person manager) {
+		this.manager = manager;
 	}
 
 	@Override
@@ -124,7 +82,7 @@ public class Task implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Task other = (Task) obj;
+		ProjectHistory other = (ProjectHistory) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
