@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Person implements Serializable {
 
@@ -30,6 +32,7 @@ public class Person implements Serializable {
 	private String phoneNumber;
 	private Date hireDate;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "manager")
 	private List<ProjectHistory> projectHistories = new ArrayList<>();
 
@@ -37,6 +40,7 @@ public class Person implements Serializable {
 	@JoinColumn(name = "department_id")
 	private Department department;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "manager")
 	private List<Project> projects = new ArrayList<>();
 

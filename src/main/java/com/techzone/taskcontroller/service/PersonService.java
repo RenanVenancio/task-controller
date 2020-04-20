@@ -58,9 +58,9 @@ public class PersonService {
 
 	public Person fromDTO(PersonNewDTO personDTO) {
 
-		Optional<Department> department = departmentRepository.findById(personDTO.getId());
+		Optional<Department> department = departmentRepository.findById(personDTO.getDepartment());
 
-		return new Person(personDTO.getId(), personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail(),
+		return new Person(null, personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail(),
 				personDTO.getPhoneNumber(), personDTO.getHireDate(), department.get());
 	}
 }

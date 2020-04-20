@@ -14,7 +14,6 @@ public class PersonNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private Integer id;
 	@NotEmpty(message = "Campo obrigatório")
 	private String firstName;
 	private String lastName;
@@ -23,7 +22,7 @@ public class PersonNewDTO implements Serializable {
 	private String phoneNumber;
 	@NotEmpty(message = "Campo obrigatório")
 	private Integer department;
-	@NotEmpty(message = "Campo obrigatório")
+
 	private Date hireDate;
 
 	public PersonNewDTO() {
@@ -31,17 +30,16 @@ public class PersonNewDTO implements Serializable {
 	}
 	
 	public PersonNewDTO(Person person) {
-		this.id = person.getId();
 		this.firstName = person.getFirstName();
 		this.lastName = person.getLastName();
 		this.email = person.getEmail();
 		this.phoneNumber = person.getPhoneNumber();
 	}
 
-	public PersonNewDTO(Integer id, String firstName, String lastName, String email, String phoneNumber,
+	public PersonNewDTO(String firstName, String lastName, String email, String phoneNumber,
 			Integer department, String hireDate) {
 		super();
-		this.id = id;
+
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -59,14 +57,6 @@ public class PersonNewDTO implements Serializable {
 		} catch (ParseException e) {			
 			throw new RuntimeException("Data inválida");
 		}
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getFirstName() {

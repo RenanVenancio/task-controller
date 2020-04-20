@@ -3,6 +3,8 @@ package com.techzone.taskcontroller.rest;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +40,7 @@ public class PersonRest {
 	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Person> save( @RequestBody PersonNewDTO personDTO){
+	public ResponseEntity<Person> save(@RequestBody PersonNewDTO personDTO){
 		Person person = service.fromDTO(personDTO);
 		return ResponseEntity.ok().body(service.save(person));
 	}
