@@ -44,7 +44,10 @@ public class Person implements Serializable {
 		// EMPTY CONSTRUCTOR
 	}
 
-	public Person(Integer id, String firstName, String lastName, String email, String phoneNumber, Date hireDate) {
+
+
+	public Person(Integer id, String firstName, String lastName, String email,
+		 String phoneNumber, Date hireDate, Department department) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -52,7 +55,10 @@ public class Person implements Serializable {
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.hireDate = hireDate;
+		this.department = department;
 	}
+
+
 
 	public Integer getId() {
 		return id;
