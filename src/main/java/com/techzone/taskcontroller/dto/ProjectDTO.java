@@ -1,9 +1,12 @@
 package com.techzone.taskcontroller.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.techzone.taskcontroller.domain.Project;
+import com.techzone.taskcontroller.domain.Task;
 import com.techzone.taskcontroller.util.FormatDate;
 
 public class ProjectDTO implements Serializable{
@@ -18,6 +21,8 @@ public class ProjectDTO implements Serializable{
 	private Date startDate;	
 	private Date endDate;
     private Integer department;
+
+    private List<Task> tasks = new ArrayList<>();
     
     public ProjectDTO(){
 
@@ -32,6 +37,8 @@ public class ProjectDTO implements Serializable{
         this.startDate = project.getStartDate();	
         this.endDate = project.getEndDate();
         this.department = project.getDepartment().getId();
+
+        this.tasks.addAll(project.getTasks());
     }
 
     public ProjectDTO(Integer id, String projectTitle, Integer manager, Long minSalary, Long maxSalary, String startDate, String endDate, Integer department) {
@@ -109,5 +116,15 @@ public class ProjectDTO implements Serializable{
     public void setDepartment(Integer department) {
         this.department = department;
     }
+
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+
 
 }

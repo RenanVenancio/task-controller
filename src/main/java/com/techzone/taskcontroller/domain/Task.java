@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techzone.taskcontroller.domain.enums.TaskStatus;
 import com.techzone.taskcontroller.util.FormatDate;
 
@@ -29,6 +30,7 @@ public class Task implements Serializable {
 	private Date startDate;
 	private Date endDate;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "tasks")
 	private List<Project> projects = new ArrayList<>();
 

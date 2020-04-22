@@ -24,10 +24,10 @@ public class ProjectService {
 	ProjectRepository repository;
 
 	@Autowired
-	DepartmentRepository departmentRepository;
+	DepartmentService departmentService;
 
 	@Autowired
-	PersonRepository personRepository;
+	PersonService personService;
 
 	@Autowired
 	TaskRepository taskRepository;
@@ -74,19 +74,19 @@ public class ProjectService {
 
 	public Project fromDTO(ProjectNewDTO projectDTO) {
 
-		// Optional<Department> department = departmentRepository.findById(projectDTO.getDepartment().getId());
+		Department department = departmentService.findById(projectDTO.getDepartment());
 
-		// Optional<Person> person = personRepository.findById(projectDTO.getManager().getId());
+		Person person = personService.findById(projectDTO.getManager());
 
 		Project project = new Project(
 			null,
 			projectDTO.getProjectTitle(),
-			projectDTO.getManager(),	
+			person,	
 			projectDTO.getMinSalary(),		
 			projectDTO.getMaxSalary(),	
 			projectDTO.getStartDate(),
 			projectDTO.getEndDate(),	
-			projectDTO.getDepartment()
+			department
 		);
 
 		project.getTasks().addAll(projectDTO.getTasks());

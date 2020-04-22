@@ -17,12 +17,12 @@ public class ProjectNewDTO implements Serializable{
 
     private Integer id;
 	private String projectTitle;
-	private Person manager;	
+	private Integer manager;	
 	private Long minSalary;	
 	private Long maxSalary;
 	private Date startDate;	
 	private Date endDate;
-    private Department department;
+    private Integer department;
 
     private List<Task> tasks = new ArrayList<>();
     
@@ -33,15 +33,15 @@ public class ProjectNewDTO implements Serializable{
     public ProjectNewDTO(Project project){
         this.id = project.getId();
         this.projectTitle = project.getProjectTitle();
-        this.manager = project.getManager();	
+        this.manager = project.getManager().getId();	
         this.minSalary = project.getMinSalary();	
         this.maxSalary = project.getMaxSalary();
         this.startDate = project.getStartDate();	
         this.endDate = project.getEndDate();
-        this.department = project.getDepartment();
+        this.department = project.getDepartment().getId();
     }
 
-    public ProjectNewDTO(Integer id, String projectTitle, Person manager, Long minSalary, Long maxSalary, String startDate, String endDate, Department department) {
+    public ProjectNewDTO(Integer id, String projectTitle, Integer manager, Long minSalary, Long maxSalary, String startDate, String endDate, Integer department) {
         this.id = id;
         this.projectTitle = projectTitle;
         this.manager = manager;
@@ -69,11 +69,11 @@ public class ProjectNewDTO implements Serializable{
         this.projectTitle = projectTitle;
     }
 
-    public Person getManager() {
+    public Integer getManager() {
         return this.manager;
     }
 
-    public void setManager(Person manager) {
+    public void setManager(Integer manager) {
         this.manager = manager;
     }
 
@@ -109,11 +109,11 @@ public class ProjectNewDTO implements Serializable{
         this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
     }
 
-    public Department getDepartment() {
+    public Integer getDepartment() {
         return this.department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(Integer department) {
         this.department = department;
     }
 
