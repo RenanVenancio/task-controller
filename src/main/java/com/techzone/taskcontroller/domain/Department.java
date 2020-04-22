@@ -26,8 +26,9 @@ public class Department implements Serializable {
 	@OneToMany(mappedBy = "department")
 	private List<Person> persons = new ArrayList<>();
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "department")
-	private List<ProjectHistory> projectHistories = new ArrayList<>();
+	private List<Project> projects = new ArrayList<>();
 
 	public Department() {
 		// EMPTY CONSTRUCTOR
@@ -62,12 +63,12 @@ public class Department implements Serializable {
 		this.persons = persons;
 	}
 
-	public List<ProjectHistory> getProjectHistories() {
-		return projectHistories;
+	public List<Project> getProjects() {
+		return projects;
 	}
 
-	public void setProjectHistories(List<ProjectHistory> projectHistories) {
-		this.projectHistories = projectHistories;
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 	@Override

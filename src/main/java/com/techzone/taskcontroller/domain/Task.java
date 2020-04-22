@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 import com.techzone.taskcontroller.domain.enums.TaskStatus;
+import com.techzone.taskcontroller.util.FormatDate;
 
 @Entity
 public class Task implements Serializable {
@@ -35,15 +36,15 @@ public class Task implements Serializable {
 		// EMPTY CONSTRUCTOR
 	}
 
-	public Task(Integer id, String title, String description, Long taskPoints, TaskStatus status, Date startDate,
-			Date endDate) {
+	public Task(Integer id, String title, String description, Long taskPoints, TaskStatus status, String startDate,
+			String endDate) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.taskPoints = taskPoints;
 		this.status = status.getCod();
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
+		this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
 	}
 
 	public Integer getId() {
@@ -90,16 +91,16 @@ public class Task implements Serializable {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setStartDate(String startDate) {
+		this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
 	}
 
 	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
+	public void setEndDate(String endDate) {
+		this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
 	}
 
 	public List<Project> getProjects() {

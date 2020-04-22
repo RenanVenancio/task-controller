@@ -1,0 +1,128 @@
+package com.techzone.taskcontroller.dto;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.techzone.taskcontroller.domain.Department;
+import com.techzone.taskcontroller.domain.Person;
+import com.techzone.taskcontroller.domain.Project;
+import com.techzone.taskcontroller.domain.Task;
+import com.techzone.taskcontroller.util.FormatDate;
+
+public class ProjectNewDTO implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    private Integer id;
+	private String projectTitle;
+	private Person manager;	
+	private Long minSalary;	
+	private Long maxSalary;
+	private Date startDate;	
+	private Date endDate;
+    private Department department;
+
+    private List<Task> tasks = new ArrayList<>();
+    
+    public ProjectNewDTO(){
+
+    }
+
+    public ProjectNewDTO(Project project){
+        this.id = project.getId();
+        this.projectTitle = project.getProjectTitle();
+        this.manager = project.getManager();	
+        this.minSalary = project.getMinSalary();	
+        this.maxSalary = project.getMaxSalary();
+        this.startDate = project.getStartDate();	
+        this.endDate = project.getEndDate();
+        this.department = project.getDepartment();
+    }
+
+    public ProjectNewDTO(Integer id, String projectTitle, Person manager, Long minSalary, Long maxSalary, String startDate, String endDate, Department department) {
+        this.id = id;
+        this.projectTitle = projectTitle;
+        this.manager = manager;
+        this.minSalary = minSalary;
+        this.maxSalary = maxSalary;
+        this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
+        this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
+        this.department = department;
+    }
+
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getProjectTitle() {
+        return this.projectTitle;
+    }
+
+    public void setProjectTitle(String projectTitle) {
+        this.projectTitle = projectTitle;
+    }
+
+    public Person getManager() {
+        return this.manager;
+    }
+
+    public void setManager(Person manager) {
+        this.manager = manager;
+    }
+
+    public Long getMinSalary() {
+        return this.minSalary;
+    }
+
+    public void setMinSalary(Long minSalary) {
+        this.minSalary = minSalary;
+    }
+
+    public Long getMaxSalary() {
+        return this.maxSalary;
+    }
+
+    public void setMaxSalary(Long maxSalary) {
+        this.maxSalary = maxSalary;
+    }
+
+    public Date getStartDate() {
+        return this.startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
+    }
+
+    public Date getEndDate() {
+        return this.endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
+    }
+
+    public Department getDepartment() {
+        return this.department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+}

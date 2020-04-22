@@ -3,6 +3,7 @@ package com.techzone.taskcontroller.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,7 +35,7 @@ public class DepartmentRest {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Department> save( @RequestBody Department department){
-		return ResponseEntity.ok().body(service.save(department));
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(department));
 	}
 	
 	

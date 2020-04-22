@@ -2,6 +2,7 @@ package com.techzone.taskcontroller.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,28 +23,49 @@ public class Project implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	@NotNull
 	private String projectTitle;
+	
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "manager_id")
 	private Person manager;
+	
 	@NotNull
 	private Long minSalary;
+	
 	@NotNull
 	private Long maxSalary;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "PROJECT_TASK",
-			joinColumns = @JoinColumn(name = "project_id"),
-			inverseJoinColumns = @JoinColumn(name = "task_id")
-	)
+
+	private Date startDate;
 	
+	private Date endDate;
+
+	@ManyToOne
+	@JoinColumn(name = "department_id")
+	private Department department;
+
+	@ManyToMany
+	@JoinTable(name = "PROJECT_TASK", joinColumns = @JoinColumn(name = "project_id"), inverseJoinColumns = @JoinColumn(name = "task_id"))
 	private List<Task> tasks = new ArrayList<>();
 
 	public Project() {
 		// EMPTY CONSTRUCTOR
+	}
+
+	public Project(Integer id, String projectTitle, Person manager, Long minSalary,
+			Long maxSalary, Date startDate, Date endDate, Department department) {
+		super();
+		this.id = id;
+		this.projectTitle = projectTitle;
+		this.manager = manager;
+		this.minSalary = minSalary;
+		this.maxSalary = maxSalary;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.department = department;
 	}
 
 	public Integer getId() {
@@ -84,6 +106,30 @@ public class Project implements Serializable {
 
 	public void setMaxSalary(Long maxSalary) {
 		this.maxSalary = maxSalary;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 
 	public List<Task> getTasks() {

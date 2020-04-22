@@ -36,11 +36,10 @@ public class PersonRest {
 		List<Person> personList = service.findAll();
 		List<PersonDTO> personDTOs = personList.stream().map((obj) -> new PersonDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(personDTOs);
-	}
-	
+	}	
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Person> save(@RequestBody PersonNewDTO personDTO){
+	public ResponseEntity<Person> save(@Valid @RequestBody PersonNewDTO personDTO){
 		Person person = service.fromDTO(personDTO);
 		return ResponseEntity.ok().body(service.save(person));
 	}

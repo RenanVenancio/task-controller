@@ -6,21 +6,27 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
 
 import com.techzone.taskcontroller.domain.Person;
+import com.techzone.taskcontroller.util.FormatDate;
 
 public class PersonNewDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotEmpty(message = "Campo obrigatório")
+	@NotNull(message = "Campo obrigatório")
+	@Length(min = 2, max = 80, message = "Deve conter entre 5 e 80 caracteres")
 	private String firstName;
 	private String lastName;
-	@Email(message = "O email informado não é válido")
+	@NotNull(message = "Campo obrigatório")
+	@Email(message = "Forneça um email válido")
 	private String email;
+	@NotNull(message = "Campo obrigatório")
 	private String phoneNumber;
-	@NotEmpty(message = "Campo obrigatório")
+	@NotNull(message = "Campo obrigatório")
 	private Integer department;
 
 	private Date hireDate;
@@ -38,25 +44,13 @@ public class PersonNewDTO implements Serializable {
 
 	public PersonNewDTO(String firstName, String lastName, String email, String phoneNumber,
 			Integer department, String hireDate) {
-		super();
 
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.department = department;
-		this.hireDate = formatHireDate(hireDate);
-	}
-
-	private Date formatHireDate(String hire) {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		Date date;
-		try {
-			date = sdf.parse(hire);
-			return date;
-		} catch (ParseException e) {			
-			throw new RuntimeException("Data inválida");
-		}
+		this.hireDate = FormatDate.parse(hireDate, "dd/MM/yyyy");
 	}
 
 	public String getFirstName() {
@@ -104,7 +98,7 @@ public class PersonNewDTO implements Serializable {
 	}
 
 	public void setHireDate(String hireDate) {
-		this.hireDate = formatHireDate(hireDate);
+		this.hireDate = FormatDate.parse(hireDate, "dd/MM/yyyy");
 	}
 
 

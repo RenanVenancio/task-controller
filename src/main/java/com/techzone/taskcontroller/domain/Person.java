@@ -20,26 +20,30 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private Integer id;
-	@NotNull
+	
+	@NotNull(message = "Campo obrigatório")
 	private String firstName;
+	
 	private String lastName;
+	
 	@NotNull
 	private String email;
-	@NotNull
+	
+	@NotNull(message = "Campo obrigatório")
 	private String phoneNumber;
+	
 	private Date hireDate;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "manager")
-	private List<ProjectHistory> projectHistories = new ArrayList<>();
-
 	@ManyToOne
 	@JoinColumn(name = "department_id")
 	private Department department;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "manager")
 	private List<Project> projects = new ArrayList<>();
@@ -48,10 +52,8 @@ public class Person implements Serializable {
 		// EMPTY CONSTRUCTOR
 	}
 
-
-
-	public Person(Integer id, String firstName, String lastName, String email,
-		 String phoneNumber, Date hireDate, Department department) {
+	public Person(Integer id, String firstName, String lastName, String email, String phoneNumber, Date hireDate,
+			Department department) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -61,8 +63,6 @@ public class Person implements Serializable {
 		this.hireDate = hireDate;
 		this.department = department;
 	}
-
-
 
 	public Integer getId() {
 		return id;
@@ -110,14 +110,6 @@ public class Person implements Serializable {
 
 	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
-	}
-
-	public List<ProjectHistory> getProjectHistories() {
-		return projectHistories;
-	}
-
-	public void setProjectHistories(List<ProjectHistory> projectHistories) {
-		this.projectHistories = projectHistories;
 	}
 
 	public Department getDepartment() {
