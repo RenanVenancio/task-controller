@@ -11,6 +11,7 @@ import com.techzone.taskcontroller.dto.ProjectNewDTO;
 import com.techzone.taskcontroller.service.ProjectService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -40,7 +41,7 @@ public class ProjectRest {
     @RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Project> save(@Valid @RequestBody ProjectNewDTO projectDTO){
 		Project project = service.fromDTO(projectDTO);
-		return ResponseEntity.ok().body(service.save(project));
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.save(project));
 	}
 
 }

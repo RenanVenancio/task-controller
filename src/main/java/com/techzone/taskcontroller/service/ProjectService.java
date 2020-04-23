@@ -34,7 +34,7 @@ public class ProjectService {
 
 	public Project findById(Integer id) {
 		Optional<Project> project = repository.findById(id);
-		return project.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+		return project.orElseThrow(() -> new ObjectNotFoundException("Project not found"));
 	}
 
 	public List<Project> findAll() {
@@ -45,7 +45,9 @@ public class ProjectService {
 	public Project save(Project project) {
 		project.setId(null); // Limpando o id, caso venha no objeto
 		project = repository.save(project);
-		taskRepository.saveAll(project.getTasks());
+		if(!project.getTasks().isEmpty()){
+			taskRepository.saveAll(project.getTasks());
+		}
 		return project;
 		
 	}

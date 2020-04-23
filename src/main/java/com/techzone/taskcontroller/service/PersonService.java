@@ -24,7 +24,7 @@ public class PersonService {
 
 	public Person findById(Integer id) {
 		Optional<Person> person = repository.findById(id);
-		return person.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+		return person.orElseThrow(() -> new ObjectNotFoundException("Person not found"));
 	}
 
 	public List<Person> findAll() {

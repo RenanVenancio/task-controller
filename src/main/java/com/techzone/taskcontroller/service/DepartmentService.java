@@ -21,7 +21,7 @@ public class DepartmentService {
 
 	public Department findById(Integer id) {
 		Optional<Department> department = repository.findById(id);
-		return department.orElseThrow(() -> new ObjectNotFoundException("Object not found"));
+		return department.orElseThrow(() -> new ObjectNotFoundException("Department not found"));
 	}
 
 	public List<Department> findAll() {
