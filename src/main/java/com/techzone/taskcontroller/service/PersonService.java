@@ -20,7 +20,7 @@ public class PersonService {
 	PersonRepository repository;
 
 	@Autowired
-	DepartmentRepository departmentRepository;
+	DepartmentService departmentService;
 
 	public Person findById(Integer id) {
 		Optional<Person> person = repository.findById(id);
@@ -58,9 +58,9 @@ public class PersonService {
 
 	public Person fromDTO(PersonNewDTO personDTO) {
 
-		Optional<Department> department = departmentRepository.findById(personDTO.getDepartment());
+		Department department = departmentService.findById(personDTO.getDepartment());
 
 		return new Person(null, personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail(),
-				personDTO.getPhoneNumber(), personDTO.getHireDate(), department.get());
+				personDTO.getPhoneNumber(), personDTO.getHireDate(), department);
 	}
 }
