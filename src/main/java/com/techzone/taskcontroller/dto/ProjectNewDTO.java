@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import com.techzone.taskcontroller.domain.Department;
-import com.techzone.taskcontroller.domain.Person;
 import com.techzone.taskcontroller.domain.Project;
 import com.techzone.taskcontroller.domain.Task;
 import com.techzone.taskcontroller.util.FormatDate;
