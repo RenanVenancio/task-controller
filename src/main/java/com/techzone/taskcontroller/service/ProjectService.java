@@ -11,8 +11,6 @@ import com.techzone.taskcontroller.domain.Department;
 import com.techzone.taskcontroller.domain.Person;
 import com.techzone.taskcontroller.domain.Project;
 import com.techzone.taskcontroller.dto.ProjectNewDTO;
-import com.techzone.taskcontroller.repository.DepartmentRepository;
-import com.techzone.taskcontroller.repository.PersonRepository;
 import com.techzone.taskcontroller.repository.ProjectRepository;
 import com.techzone.taskcontroller.repository.TaskRepository;
 import com.techzone.taskcontroller.service.excepetion.ObjectNotFoundException;
