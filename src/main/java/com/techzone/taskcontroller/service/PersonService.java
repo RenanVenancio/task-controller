@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.techzone.taskcontroller.domain.Department;
 import com.techzone.taskcontroller.domain.Person;
 import com.techzone.taskcontroller.dto.PersonNewDTO;
-import com.techzone.taskcontroller.repository.DepartmentRepository;
 import com.techzone.taskcontroller.repository.PersonRepository;
 import com.techzone.taskcontroller.service.excepetion.ObjectNotFoundException;
 
