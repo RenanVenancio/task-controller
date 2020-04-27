@@ -13,7 +13,6 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.techzone.taskcontroller.domain.enums.TaskStatus;
-import com.techzone.taskcontroller.util.FormatDate;
 
 @Entity
 public class Task implements Serializable {
@@ -38,15 +37,15 @@ public class Task implements Serializable {
 		// EMPTY CONSTRUCTOR
 	}
 
-	public Task(Integer id, String title, String description, Long taskPoints, TaskStatus status, String startDate,
-			String endDate) {
+	public Task(Integer id, String title, String description, Long taskPoints, TaskStatus status, Date startDate,
+			Date endDate) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.taskPoints = taskPoints;
 		this.status = status.getCod();
-		this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
-		this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
+		this.startDate = startDate;
+		this.endDate = endDate;
 	}
 
 	public Integer getId() {
@@ -93,16 +92,16 @@ public class Task implements Serializable {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
 	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public List<Project> getProjects() {
@@ -136,6 +135,14 @@ public class Task implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "{" + " id='" + getId() + "'" + ", title='" + getTitle() + "'" + ", description='" + getDescription()
+				+ "'" + ", taskPoints='" + getTaskPoints() + "'" + ", status='" + getStatus() + "'" + ", startDate='"
+				+ getStartDate() + "'" + ", endDate='" + getEndDate() + "'" + ", projects='" + getProjects() + "'"
+				+ "}";
 	}
 
 }

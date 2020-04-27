@@ -27,8 +27,8 @@ public class ProjectRest {
     ProjectService service;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Project findById(@PathVariable Integer id){
-        return service.findById(id);
+    public ResponseEntity<Project> findById(@PathVariable Integer id){
+        return ResponseEntity.ok().body(service.findById(id));
     }
 
     @RequestMapping(method = RequestMethod.GET)

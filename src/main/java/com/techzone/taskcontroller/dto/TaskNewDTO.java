@@ -1,10 +1,6 @@
 package com.techzone.taskcontroller.dto;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import com.techzone.taskcontroller.domain.Project;
 import com.techzone.taskcontroller.domain.Task;
 import com.techzone.taskcontroller.util.FormatDate;
 
@@ -17,8 +13,11 @@ public class TaskNewDTO {
     private Long status;
     private Date startDate;
     private Date endDate;
+    private Integer projectId;
 
-    private List<Project> projects = new ArrayList<>();
+    public TaskNewDTO(){
+        this.projectId = 0;
+    }
 
     public TaskNewDTO(Task task) {
         this.id = task.getId();
@@ -31,7 +30,7 @@ public class TaskNewDTO {
     }
 
     public TaskNewDTO(Integer id, String title, String description, Long taskPoints, Long status, String startDate,
-    String endDate) {
+    String endDate, Integer projectId) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -39,6 +38,7 @@ public class TaskNewDTO {
         this.status = status;
         this.startDate = FormatDate.parse(startDate, "dd/MM/yyyy");
         this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
+        this.projectId = projectId;
     }
 
     public Integer getId() {
@@ -97,12 +97,12 @@ public class TaskNewDTO {
         this.endDate = FormatDate.parse(endDate, "dd/MM/yyyy");
     }
 
-    public List<Project> getProjects() {
-        return this.projects;
+    public Integer getProjectId() {
+        return this.projectId;
     }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
     }
 
 }

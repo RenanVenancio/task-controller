@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.techzone.taskcontroller.domain.Department;
 import com.techzone.taskcontroller.domain.Person;
 import com.techzone.taskcontroller.domain.Project;
+
 import com.techzone.taskcontroller.dto.ProjectNewDTO;
+import com.techzone.taskcontroller.dto.TaskNewDTO;
 import com.techzone.taskcontroller.repository.ProjectRepository;
 import com.techzone.taskcontroller.repository.TaskRepository;
 import com.techzone.taskcontroller.service.excepetion.ObjectNotFoundException;
@@ -29,6 +31,9 @@ public class ProjectService {
 
 	@Autowired
 	TaskRepository taskRepository;
+
+	@Autowired
+	TaskService taskService;
 
 	public Project findById(Integer id) {
 		Optional<Project> project = repository.findById(id);
@@ -89,7 +94,9 @@ public class ProjectService {
 			department
 		);
 
-		project.getTasks().addAll(projectDTO.getTasks());
+		for(TaskNewDTO t : projectDTO.getTasks()){
+			project.getTasks().add(taskService.fromDTO(t));
+		}
 		
 		return project;
 	}

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import com.techzone.taskcontroller.domain.Project;
-import com.techzone.taskcontroller.domain.Task;
+
 import com.techzone.taskcontroller.util.FormatDate;
 
 public class ProjectNewDTO implements Serializable{
@@ -21,7 +21,7 @@ public class ProjectNewDTO implements Serializable{
 	private Date endDate;
     private Integer department;
 
-    private List<Task> tasks = new ArrayList<>();
+    private List<TaskNewDTO> tasks = new ArrayList<>();
     
     public ProjectNewDTO(){
 
@@ -114,11 +114,11 @@ public class ProjectNewDTO implements Serializable{
         this.department = department;
     }
 
-    public List<Task> getTasks() {
+    public List<TaskNewDTO> getTasks() {
         return this.tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(List<TaskNewDTO> tasks) {
         this.tasks = tasks;
     }
 
